@@ -28,7 +28,7 @@ We have used two datasets in this project. The first dataset includes Zomato API
 •	Rating text: text-based on the rating of rating
 •	Votes: Number of ratings cast by people
 
-      The second dataset includes the details of various food choices and various information on the different types of food. It has 125 rows and 61 columns. Some of the valuable attributes of the 'food_choices.csv' are:
+The second dataset includes the details of various food choices and various information on the different types of food. It has 125 rows and 61 columns. Some of the valuable attributes of the 'food_choices.csv' are:
 •	comfort_food_reasons: It contains different moods and emotions.
 •	comfort_food: It has different types of foods for different moods.
      There are more columns in this dataset, but we only need these two columns to build our recommendation model.
@@ -45,3 +45,41 @@ Importing Libraries: The first step for this will be importing the required libr
 •	NLTK
 
 Read the Data: After importing the library, we first need to read the CSV file on Jupyter notebook.
+Handling Null values: The two mentioned above did not contain any null value. It was checked using IsNull().
+ Moreover, as there were no null values in the two datasets, we continued with further data analysis.
+In this project, we will only use the data from restaurants in Delhi. We need to get data only for Delhi from the dataset. The country code '1' and city 'Delhi' are selected to get the data for the restaurant in Delhi.
+We also got the number of cuisines a particular restaurant has from the Cuisines column. The num_cuisine column will be the new column in the data frame, which shows the number of cuisines. It is done by using the splitting the string.
+The dataset after this operation will have an additional column name num_cuisines.
+The following bar graph can visualize the number of aggregate ratings:
+It can be seen from the graph that most of the restaurant has ratings between 3.0- 3.5. 
+ One more plot was made to get the restaurant details on the map for that we used Plotly library. The plotly scatter_mapbox plot is used to get the scatter points according to the restaurant's longitude and latitude as mentioned in the dataset. In addition, when we bring the cursor to one of the points, we can see the restaurant name, rating, and location.
+The above plot shows the Delhi map with each restaurant's location in the dataset. As it can be seen from the range scale the darker, the green colour gets, the more is the restaurant's rating.
+ To find out how many top cuisines a restaurant serves, we used Counter(). To perform this operation, we split the cooking from the Cuisines column and then used Counter() to get the count of every cuisine.
+The graph below shows the ten cuisines and how many restaurants serve those cuisines. It can also be said that these are the top 10 cuisines in Delhi. Also, we can see that there are 78 types of cuisines available in Delhi.
+ Furthermore, similarly, from the column num_cuisines, we can visualize how many cuisines are served in the restaurant. 
+
+K-Means clustering: K-means clustering is used in this project to determine where the high-rated restaurant is located in Delhi. These clusters are formed using the res_data's Longitude, Latitude and Aggregate rating from the res_data. We set the number of clusters to 7.
+
+The 7 clusters displayed in the plot show the different zones of Delhi, with the labels showing the average rating of all restaurants in the particular zone.  We found that the cluster in the middle indicates that the central part of Delhi has a higher rating restaurant.
+       
+After analyzing the first dataset, we then worked on our second dataset. We found the types of comfort food for different moods from this dataset. As stated previously, we will only use two columns from this data frame.
+
+ 
+# IV.	OUTCOMES 
+To get the three comfort food from the above dataset, we made a search_comfort() which holds the parameter mood and searches for the foods for that particular food. We used the comfort food reasons column to split the value in this function and converted all the text in lowercase. These texts are stored in the temp variable. If the user specifies the mood, it will find the comfort food by splitting the text from comfort_food columns and making a dictionary for a particular mood.
+Another function was created find_my_comfort, which takes the user's mood and will display the comfort foods. The comfort foods for happy are:
+
+ Based on the one food from the comfort food, we found the restaurant which serves that particular food. This was done by selecting the rows from comfort_food that contains pizza. We sort the data frame by the Aggregate rating to get the highest rating. The output contains only the top rating restaurant having pizza in their menu and details.
+
+
+ Using the above data, we plotted the location of these restaurants on the map using Plotly scatter_mapbox. This map shows the location of 3 restaurants, their cuisines, and their rating.
+
+ 
+# V.	REFERENCES
+•	Plotlygraphs, "Builtin colorscales," Builtin Colorscales, 03-Jul-2019. [Online]. Available: https://plotly.com/python/builtin-colorscales/.
+•	S. Mehta, "Zomato Restaurants Data," Kaggle, 13-Mar-2018. [Online]. Available: https://www.kaggle.com/shrutimehta/zomato-restaurants-data 
+•	D. Ong, "Yelp restaurant recommendation system - capstone project," Medium, 25-Oct-2020. [Online]. Available: https://towardsdatascience.com/yelp-restaurant-recommendation-system-capstone-project-264fe7a7dea1
+•	NLTK. [Online]. Available: https://www.nltk.org/_modules/nltk/stem/wordnet.html
+•	BoraPajo, "Food choices," Kaggle, 23-Apr-2017. [Online]. Available: https://www.kaggle.com/borapajo/food-choices 
+
+
